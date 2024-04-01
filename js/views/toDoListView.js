@@ -2,15 +2,20 @@ import { toDoItemTemplate } from '../templates/toDoItemTemplate'
 import { subscribe } from '../models/toDoListModel'
 import { deleteToDoController } from '../controllers/deleteToDoController'
 import { updateToDoController } from '../controllers/updateToDoController'
+import { addToDoController } from '../controllers/addToDoController'
 
 let view
-
 
 export function toDoListView() {
     view = document.querySelector('#to-do-list')
     view.addEventListener('click', onHandleClick)
+
+    const addButton = document.querySelector('#add')
+    addButton.addEventListener('click', addToDoController)
+
+    subscribe(render)
 }
-subscribe(render)
+
 function render(data) {
     const div = document.createElement('div')
     const toDoList = document.querySelector('#item-container')
@@ -29,6 +34,10 @@ function onHandleClick(e) {
         case 'edit':
             console.log(e.target.dataset.uid)    
             updateToDoController(e.target.dataset.uid)
+            break
+        case 'add':
+            console.log(e.target.dataset.uid) 
+            addToDoController(e.target.dataset.uid)
             break
         default:
             null    

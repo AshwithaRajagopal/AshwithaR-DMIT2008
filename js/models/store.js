@@ -30,4 +30,8 @@ const updateStore = (todo) => {
     return store
 }
 
+const addToStore = (newToDo) => {
+    store = [...store, newToDo]
+    return store
+}
 export {getStore, createStore, removeFromStore, updateStore}
